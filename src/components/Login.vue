@@ -1,5 +1,5 @@
 <template>
-  <div class="fullscreen">
+  <div class="fullscreen column justify-center items-center">
     <q-input v-model="username" float-label="Nome utente" />
     <q-input v-model="password" type="password" float-label="Password" />
 
