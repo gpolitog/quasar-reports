@@ -10,6 +10,8 @@
 <script>
 import { QInput, QBtn } from 'quasar'
 
+import router from '../router'
+
 export default {
   components: {
     QInput,
@@ -29,7 +31,7 @@ export default {
       }
       this.$http.post(this.config.routes.login, options)
         .then(() => {
-          alert('ok')
+          router.push('/report')
         })
         .catch((error) => {
           alert(error)
