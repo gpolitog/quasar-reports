@@ -90,7 +90,8 @@
 </template>
 
 <script>
-  import { QDatetime, QSelect, QKnob, QInput } from 'quasar'
+  import { QDatetime, QSelect, QKnob, QInput, LocalStorage } from 'quasar'
+  import router from '../router'
 
   export default {
     components: {
@@ -121,7 +122,7 @@
       }
     },
     mounted () {
-      this.$http.get(this.config.routes.select)
+      this.$http.post(this.config.routes.select, {token: LocalStorage.get.item('authToken')})
         .then(result => {
           this.siteOptions = result.data.site.map(site => {
             return {
@@ -138,7 +139,7 @@
         })
         .catch(error => {
           if (error) {
-            console.log(error)
+            router.push('/')
           }
         })
     }

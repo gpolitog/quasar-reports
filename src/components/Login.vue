@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { QInput, QBtn } from 'quasar'
+import { QInput, QBtn, LocalStorage } from 'quasar'
 
 import router from '../router'
 
@@ -30,7 +30,8 @@ export default {
         password: this.password
       }
       this.$http.post(this.config.routes.login, options)
-        .then(() => {
+        .then(token => {
+          LocalStorage.set('authToken', token)
           router.push('/report')
         })
         .catch((error) => {
