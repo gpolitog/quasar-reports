@@ -39,24 +39,24 @@
     float-label="Fine giornata lavorativa" />
 
     <!-- TRAVEL TIME -->
-    <q-knob
-    class="self-center margin-bottom"
-    v-model="report.travelTime"
-    :min="0"
-    :max="10"
-    size="200px">
-    {{report.travelTime}} ore di viaggio
-    </q-knob>
+    <q-field
+    :label="`${report.travelTime} ore di viaggio`">
+      <q-slider
+      class="self-center margin-bottom"
+      v-model="report.travelTime"
+      :min="0"
+      :max="10" />
+    </q-field>
 
     <!-- WORK TIME -->
-    <q-knob
-    class="self-center margin-bottom"
-    v-model="report.workTime"
-    :min="0"
-    :max="10"
-    size="200px">
-    {{report.workTime}} ore di lavoro
-    </q-knob>
+    <q-field
+    :label="`${report.workTime} ore di lavoro`">
+      <q-slider
+      class="self-center margin-bottom"
+      v-model="report.workTime"
+      :min="0"
+      :max="10" />
+    </q-field>
 
     <!-- VEHICLE -->
     <q-select
@@ -72,32 +72,36 @@
     float-label="Kilometri percorsi" />
 
     <!-- HIGHWAY ENTER -->
-    <q-select
+    <q-input
     v-model="report.highwayEnter"
-    float-label="Entrata autostrada"
-    filter
-    :options="highwayOptions" />
+    float-label="Entrata autostrada">
+      <q-autocomplete
+      :static-data="highwayOptions" />
+    </q-input>
 
     <!-- HIGHWAY EXIT -->
-    <q-select
+    <q-input
     v-model="report.highwayExit"
-    float-label="Uscita autostrada"
-    filter
-    :options="highwayOptions" />
+    float-label="Uscita autostrada">
+      <q-autocomplete
+      :static-data="highwayOptions" />
+    </q-input>
 
     <!-- -->
   </div>
 </template>
 
 <script>
-  import { QDatetime, QSelect, QKnob, QInput, LocalStorage } from 'quasar'
+  import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, LocalStorage } from 'quasar'
   import router from '../router'
 
   export default {
     components: {
       QDatetime,
       QSelect,
-      QKnob,
+      QAutocomplete,
+      QSlider,
+      QField,
       QInput
     },
     data () {
