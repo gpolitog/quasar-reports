@@ -33,6 +33,8 @@ export default {
         .then(response => {
           LocalStorage.set('authToken', response.data.authToken)
           LocalStorage.set('username', response.data.username)
+          LocalStorage.set('firstName', response.data.firstName)
+          LocalStorage.set('lastName', response.data.lastName)
           router.replace('/container/report')
         })
         .catch((error) => {

@@ -1,13 +1,9 @@
 <template>
-  <div id="main" class="column scroll overflow-hidden">
-
-    <q-btn icon="record voice over"
-    color="primary"
-    @click="recordAudio">
-      Invia audio
-    </q-btn>
-
-  </div>
+  <q-btn icon="record voice over"
+  color="green"
+  @click="recordAudio">
+    Invia audio
+  </q-btn>
 </template>
 
 <script>
@@ -36,7 +32,6 @@
         const ft = new window.FileTransfer()
         const options = new window.FileUploadOptions()
         options.fileKey = 'file'
-        // options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1)
         options.fileName = LocalStorage.get.item('username') + Date.now()
         options.mimeType = 'audio/mpeg'
         options.headers = {
@@ -55,10 +50,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  #main
-    margin 15px
-  .margin-bottom
-    margin-bottom 10px
-</style>

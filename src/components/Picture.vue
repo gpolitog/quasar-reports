@@ -1,14 +1,12 @@
 <template>
-  <div id="main" class="column scroll overflow-hidden">
 
   <!-- PICTURES -->
-    <q-btn icon="photo camera"
-    color="primary"
-    @click="takePicture">
-      Invia foto
-    </q-btn>
+  <q-btn icon="photo camera"
+  color="green"
+  @click="takePicture">
+    Invia foto
+  </q-btn>
 
-  </div>
 </template>
 
 <script>
@@ -55,10 +53,3 @@
     }
   }
 </script>
-
-<style lang="stylus">
-  #main
-    margin 15px
-  .margin-bottom
-    margin-bottom 10px
-</style>

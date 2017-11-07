@@ -36,6 +36,10 @@ export default new VueRouter({
           component: load('Report')
         },
         {
+          path: 'vehicle',
+          component: load('Vehicle')
+        },
+        {
           path: 'audio',
           component: load('Audio')
         },
