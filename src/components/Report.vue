@@ -87,12 +87,15 @@
       :static-data="highwayOptions" />
     </q-input>
 
-    <!-- -->
+    <!-- SEND -->
+    <q-btn @click="send">
+      Invia
+    </q-btn>
   </div>
 </template>
 
 <script>
-  import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, LocalStorage } from 'quasar'
+  import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, QBtn, LocalStorage } from 'quasar'
   import router from '../router'
 
   export default {
@@ -102,6 +105,7 @@
       QAutocomplete,
       QSlider,
       QField,
+      QBtn,
       QInput
     },
     data () {
@@ -123,6 +127,21 @@
           workTime: 8,
           vehicleKm: 0
         }
+      }
+    },
+    methods: {
+      send () {
+        const options = {
+          token: LocalStorage.get.item('authToken'),
+          report: this.report
+        }
+        this.$http.post(this.config.routes.report, options)
+          .then(() => {
+            alert('ok')
+          })
+          .catch((error) => {
+            alert(error)
+          })
       }
     },
     mounted () {

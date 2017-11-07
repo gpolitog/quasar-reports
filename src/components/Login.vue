@@ -30,9 +30,10 @@ export default {
         password: this.password
       }
       this.$http.post(this.config.routes.login, options)
-        .then(token => {
-          LocalStorage.set('authToken', token)
-          router.push('/report')
+        .then(response => {
+          LocalStorage.set('authToken', response.data.authToken)
+          LocalStorage.set('username', response.data.username)
+          router.replace('/container/report')
         })
         .catch((error) => {
           alert(error)

@@ -28,8 +28,22 @@ export default new VueRouter({
     { path: '/',
       component: load('Login')
     },
-    { path: '/report',
-      component: load('Report')
+    { path: '/container',
+      component: load('Container'),
+      children: [
+        {
+          path: 'report',
+          component: load('Report')
+        },
+        {
+          path: 'audio',
+          component: load('Audio')
+        },
+        {
+          path: 'picture',
+          component: load('Picture')
+        }
+      ]
     },
     // Always leave this last one
     { path: '*', component: load('Error404') } // Not found

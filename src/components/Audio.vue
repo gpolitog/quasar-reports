@@ -1,0 +1,64 @@
+<template>
+  <div id="main" class="column scroll overflow-hidden">
+
+    <q-btn icon="record voice over"
+    color="primary"
+    @click="recordAudio">
+      Invia audio
+    </q-btn>
+
+  </div>
+</template>
+
+<script>
+  import { QBtn, LocalStorage } from 'quasar'
+
+  export default {
+    components: {
+      QBtn
+    },
+    data () {
+      return {
+        audioPath: ''
+      }
+    },
+    methods: {
+      recordAudio () {
+        navigator.device.capture.captureAudio(mediaFiles => {
+          this.audioPath = mediaFiles[0].fullPath
+          this.send()
+        }, () => {
+          alert('Non è stato registrato o inviato nessun audio')
+        })
+      },
+      send () {
+        const fileURL = this.audioPath
+        const ft = new window.FileTransfer()
+        const options = new window.FileUploadOptions()
+        options.fileKey = 'file'
+        // options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1)
+        options.fileName = LocalStorage.get.item('username') + Date.now()
+        options.mimeType = 'audio/mpeg'
+        options.headers = {
+          token: LocalStorage.get.item('authToken'),
+          username: LocalStorage.get.item('username')
+        }
+        ft.upload(fileURL, this.config.routes.audio,
+          () => {
+            // File sent correctly
+          },
+          () => {
+            // There were some errors
+            alert('Ci sono stati degli errori e l\'audio non è stato inviato')
+          }, options)
+      }
+    }
+  }
+</script>
+
+<style lang="stylus">
+  #main
+    margin 15px
+  .margin-bottom
+    margin-bottom 10px
+</style>
