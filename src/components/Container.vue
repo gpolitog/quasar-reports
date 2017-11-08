@@ -6,7 +6,7 @@
         <span slot="subtitle"> {{ firstName }} {{ lastName }} </span>
         <span slot="subtitle"> {{ currentDate }} </span>
       </q-toolbar-title>
-      <q-btn @click="logout" flat color="red">
+      <q-btn @click="logoutDialog" flat color="red">
         <q-icon name="person outline" />
       </q-btn>
     </q-toolbar>
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { QLayout, QTabs, QToolbarTitle, QRouteTab, QToolbar, QSelect, QIcon, QBtn, LocalStorage, date } from 'quasar'
+import { QLayout, QTabs, QToolbarTitle, QRouteTab, QToolbar, QSelect, QIcon,
+  QBtn, LocalStorage, Dialog, date } from 'quasar'
 import router from '../router'
 
 const today = date.formatDate(Date.now(), 'DD-MM-YYYY')
@@ -63,6 +64,24 @@ export default {
   methods: {
     updateSite () {
       LocalStorage.set('currentSite', this.report.site)
+    },
+    logoutDialog () {
+      const self = this
+      Dialog.create({
+        title: 'Logout',
+        message: 'Sei autenticato come ' +
+          LocalStorage.get.item('firstName') + ' ' +
+          LocalStorage.get.item('lastName') + ', vuoi cambiare profilo?',
+        buttons: [
+          'Annulla',
+          {
+            label: 'Cambia profilo',
+            handler () {
+              self.logout()
+            }
+          }
+        ]
+      })
     },
     logout () {
       LocalStorage.set('authToken', '')
