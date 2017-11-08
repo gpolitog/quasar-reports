@@ -64,6 +64,7 @@ export default {
   methods: {
     updateSite () {
       this.$http.defaults.headers.common['site'] = this.currentSite
+      LocalStorage.set('currentSite', this.currentSite)
     },
     logoutDialog () {
       const self = this

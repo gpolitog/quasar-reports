@@ -34,6 +34,11 @@
         options.fileKey = 'file'
         options.fileName = LocalStorage.get.item('username') + Date.now()
         options.mimeType = 'audio/mpeg'
+        options.headers = {
+          token: LocalStorage.get.item('authToken'),
+          username: LocalStorage.get.item('username'),
+          site: LocalStorage.get.item('currentSite')
+        }
         ft.upload(fileURL, this.config.routes.audio,
           () => {
             // File sent correctly

@@ -37,6 +37,11 @@
         options.mimeType = 'image/jpeg'
         const fileURL = this.picturePath
         options.fileName = LocalStorage.get.item('username') + Date.now()
+        options.headers = {
+          token: LocalStorage.get.item('authToken'),
+          username: LocalStorage.get.item('username'),
+          site: LocalStorage.get.item('currentSite')
+        }
         ft.upload(fileURL, this.config.routes.picture,
           () => {
             // File sent correctly
