@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     login () {
+      const self = this
       const options = {
         username: this.username,
         password: this.password
@@ -35,6 +36,8 @@ export default {
           LocalStorage.set('username', response.data.username)
           LocalStorage.set('firstName', response.data.firstName)
           LocalStorage.set('lastName', response.data.lastName)
+          self.$http.defaults.headers.common['token'] = response.data.authToken
+          self.$http.defaults.headers.common['username'] = response.data.username
           router.replace('/container/report')
         })
         .catch((error) => {

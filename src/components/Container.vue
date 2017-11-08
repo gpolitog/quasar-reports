@@ -85,11 +85,16 @@ export default {
     },
     logout () {
       LocalStorage.set('authToken', '')
+      LocalStorage.set('username', '')
+      LocalStorage.set('firstName', '')
+      LocalStorage.set('lastName', '')
+      this.$http.defaults.headers.common['token'] = ''
+      this.$http.defaults.headers.common['username'] = ''
       router.replace('/')
     }
   },
   mounted () {
-    this.$http.post(this.config.routes.select, {token: LocalStorage.get.item('authToken')})
+    this.$http.post(this.config.routes.select)
       .then(result => {
         this.ajaxOptions.siteOptions = result.data.site.map(site => {
           return {

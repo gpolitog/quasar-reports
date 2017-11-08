@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { QInput, QAutocomplete, QSelect, QBtn, LocalStorage } from 'quasar'
+import { QInput, QAutocomplete, QSelect, QBtn } from 'quasar'
 export default {
   components: {
     QSelect,
@@ -58,11 +58,7 @@ export default {
   },
   methods: {
     send () {
-      const options = {
-        token: LocalStorage.get.item('authToken'),
-        report: this.report
-      }
-      this.$http.post(this.config.routes.vehicle, options)
+      this.$http.post(this.config.routes.vehicle, this.report)
         .then(() => {
           alert('ok')
         })
