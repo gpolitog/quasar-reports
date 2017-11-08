@@ -45,6 +45,13 @@
       :max="10" />
     </q-field>
 
+    <!-- NOTE -->
+    <q-input
+    v-model="report.notes"
+    type="textarea"
+    float-label="Note"
+    clearable />
+
     <!-- SEND -->
     <q-btn @click="send" color="green">
       Invia dati generali
@@ -77,8 +84,9 @@
           workStarted: null,
           workPaused: null,
           workStopped: null,
+          travelTime: 0,
           workTime: 8,
-          travelTime: 0
+          notes: ''
         }
       }
     },
