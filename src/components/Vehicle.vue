@@ -60,10 +60,10 @@ export default {
     send () {
       this.$http.post(this.config.routes.vehicle, this.report)
         .then(() => {
-          alert('ok')
+          alert('I dati sul veicolo sono stati inviati correttamente')
         })
-        .catch((error) => {
-          alert(error)
+        .catch(err => {
+          if (err) alert('C\'è stato un errore e non è stato possibile inviare i dati')
         })
     }
   }

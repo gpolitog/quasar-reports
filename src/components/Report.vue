@@ -61,6 +61,7 @@
 
 <script>
   import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, QBtn } from 'quasar'
+  const meteoOptions = require('../meteoOptions')
 
   export default {
     components: {
@@ -75,12 +76,9 @@
     props: ['ajaxOptions'],
     data () {
       return {
-        meteoOptions: [{
-          label: 'Sereno',
-          value: 'sunny'
-        }],
+        meteoOptions: meteoOptions,
         report: {
-          meteo: 'sunny',
+          meteo: '',
           workStarted: null,
           workPaused: null,
           workStopped: null,
@@ -94,10 +92,10 @@
       send () {
         this.$http.post(this.config.routes.report, this.report)
           .then(() => {
-            alert('ok')
+            alert('I dati generali sono stati inviati correttamente')
           })
-          .catch((error) => {
-            alert(error)
+          .catch(err => {
+            if (err) alert('C\'è stato un errore e non è stato possibile inviare i dati')
           })
       }
     }

@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Sereno",
+    "value": "sunny",
+    "icon": "ion-ios-sunny"
+  },
+  {
+    "label": "Nuvoloso",
+    "value": "cloudy",
+    "icon": "ion-ios-partlysunny"
+  },
+  {
+    "label": "Pioggia",
+    "value": "rainy",
+    "icon": "ion-ios-rainy"
+  },
+  {
+    "label": "Neve",
+    "value": "snowy",
+    "icon": "ion-ios-snowy"
+  }
+]

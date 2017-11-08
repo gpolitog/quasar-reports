@@ -7,7 +7,7 @@
         <span slot="subtitle"> {{ currentDate }} </span>
       </q-toolbar-title>
       <q-btn @click="logoutDialog" flat color="red">
-        <q-icon name="person outline" />
+        <q-icon name="ion-android-exit" />
       </q-btn>
     </q-toolbar>
     <q-tabs slot="navigation" color="dark">
