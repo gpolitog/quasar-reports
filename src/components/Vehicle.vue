@@ -18,7 +18,7 @@
     v-model="report.highwayEnter"
     float-label="Entrata autostrada">
       <q-autocomplete
-      :static-data="ajaxOptions.highwayOptions" />
+      :static-data="{field: 'value', list:ajaxOptions.highwayOptions}" />
     </q-input>
 
     <!-- HIGHWAY EXIT -->
@@ -26,7 +26,7 @@
     v-model="report.highwayExit"
     float-label="Uscita autostrada">
       <q-autocomplete
-      :static-data="ajaxOptions.highwayOptions" />
+      :static-data="{field: 'value', list:ajaxOptions.highwayOptions}" />
     </q-input>
 
     <!-- SEND -->

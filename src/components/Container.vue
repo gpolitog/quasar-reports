@@ -58,7 +58,7 @@ export default {
         siteOptions: [],
         vehicleOptions: []
       },
-      currentSite: LocalStorage.get.item('currentSite') || ''
+      currentSite: ''
     }
   },
   methods: {
@@ -107,6 +107,12 @@ export default {
           return {
             label: vehicle.description,
             value: vehicle.plaque
+          }
+        })
+        this.ajaxOptions.highwayOptions = result.data.highway.map(high => {
+          return {
+            label: high.name,
+            value: high.name
           }
         })
       })
