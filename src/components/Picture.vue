@@ -40,7 +40,8 @@
         options.headers = {
           token: LocalStorage.get.item('authToken'),
           username: LocalStorage.get.item('username'),
-          site: LocalStorage.get.item('currentSite')
+          site: LocalStorage.get.item('currentSite'),
+          Connection: 'close'
         }
         ft.upload(fileURL, this.config.routes.picture,
           () => {
