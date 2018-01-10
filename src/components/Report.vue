@@ -13,11 +13,11 @@
     type="time"
     float-label="Inizio giornata lavorativa" />
 
-    <!-- WORK PAUSED -->
-    <q-datetime
-    v-model="report.workPaused"
-    type="time"
-    float-label="Pausa pranzo" />
+    <!-- WORK PAUSE -->
+    <q-select
+    v-model="report.workPause"
+    float-label="Durata pausa pranzo"
+    :options="pauseOptions" />
 
     <!-- WORK STOPPED -->
     <q-datetime
@@ -62,6 +62,7 @@
 <script>
   import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, QBtn } from 'quasar'
   const meteoOptions = require('../meteoOptions')
+  const pauseOptions = require('../pauseOptions')
 
   export default {
     components: {
@@ -77,10 +78,11 @@
     data () {
       return {
         meteoOptions: meteoOptions,
+        pauseOptions: pauseOptions,
         report: {
           meteo: '',
           workStarted: null,
-          workPaused: null,
+          workPause: 0,
           workStopped: null,
           travelTime: 0,
           workTime: 8,
