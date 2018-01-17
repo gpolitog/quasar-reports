@@ -56,7 +56,8 @@ export default {
       currentDate: today,
       ajaxOptions: {
         siteOptions: [],
-        vehicleOptions: []
+        vehicleOptions: [],
+        userOptions: []
       },
       currentSite: ''
     }
@@ -113,6 +114,12 @@ export default {
           return {
             label: high.name,
             value: high.name
+          }
+        })
+        this.ajaxOptions.userOptions = result.data.user.map(user => {
+          return {
+            label: user.firstName + ' ' + user.lastName,
+            value: user.firstName + ' ' + user.lastName
           }
         })
       })

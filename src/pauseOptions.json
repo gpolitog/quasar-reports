@@ -1,14 +1,18 @@
 [
   {
+    "label": "Nessuna",
+    "value": 0
+  },
+  {
     "label": "30 minuti",
-    "value": 30
+    "value": 0.5
   },
   {
     "label": "1 ora",
-    "value": 60
+    "value": 1
   },
   {
     "label": "1 ora e mezza",
-    "value": 90
+    "value": 1.5
   }
 ]

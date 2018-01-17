@@ -1,6 +1,14 @@
 <template>
   <div>
 
+    <!-- SQUAD -->
+    <q-select
+    multiple
+    toggle
+    v-model="report.squad"
+    float-label="Squadra"
+    :options="ajaxOptions.userOptions" />
+
     <!-- METEO -->
     <q-select
     v-model="report.meteo"
@@ -60,7 +68,7 @@
 </template>
 
 <script>
-  import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, QBtn } from 'quasar'
+  import { QDatetime, QSelect, QAutocomplete, QSlider, QInput, QField, QBtn, LocalStorage } from 'quasar'
   const meteoOptions = require('../meteoOptions')
   const pauseOptions = require('../pauseOptions')
 
@@ -76,13 +84,15 @@
     },
     props: ['ajaxOptions'],
     data () {
+      const user = LocalStorage.get.item('firstName') + ' ' + LocalStorage.get.item('lastName')
       return {
         meteoOptions: meteoOptions,
         pauseOptions: pauseOptions,
         report: {
+          squad: [user],
           meteo: '',
           workStarted: null,
-          workPause: 0,
+          workPause: null,
           workStopped: null,
           travelTime: 0,
           workTime: 8,
