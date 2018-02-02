@@ -1,24 +1,39 @@
 <template>
+  <div>
+    <!-- TAKE A PICTURE -->
+    <q-btn icon="photo camera"
+    color="green"
+    @click="takePicture">
+      Scatta foto
+    </q-btn>
 
-  <!-- PICTURES -->
-  <q-btn icon="photo camera"
-  color="green"
-  @click="takePicture">
-    Invia foto
-  </q-btn>
-
+    <!-- UPLOAD A PICTURE -->
+    <q-uploader
+    multiple
+    :headers="headers"
+    :url="url"
+    style="margin-top: 10px;"/>
+  </div>
 </template>
 
 <script>
-  import { QBtn, LocalStorage } from 'quasar'
+  import { QBtn, QUploader, LocalStorage } from 'quasar'
 
   export default {
     components: {
-      QBtn
+      QBtn,
+      QUploader
     },
     data () {
       return {
-        picturePath: ''
+        picturePath: '',
+        url: this.config.routes.pictures,
+        headers: {
+          token: LocalStorage.get.item('authToken'),
+          username: LocalStorage.get.item('username'),
+          site: LocalStorage.get.item('currentSite'),
+          Connection: 'close'
+        }
       }
     },
     methods: {
@@ -37,12 +52,7 @@
         options.mimeType = 'image/jpeg'
         const fileURL = this.picturePath
         options.fileName = LocalStorage.get.item('username') + Date.now()
-        options.headers = {
-          token: LocalStorage.get.item('authToken'),
-          username: LocalStorage.get.item('username'),
-          site: LocalStorage.get.item('currentSite'),
-          Connection: 'close'
-        }
+        options.headers = this.headers
         ft.upload(fileURL, this.config.routes.picture,
           () => {
             // File sent correctly
