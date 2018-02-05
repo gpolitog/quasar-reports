@@ -40,7 +40,7 @@
       class="self-center margin-bottom"
       v-model="report.travelTime"
       :min="0"
-      :max="10" />
+      :max="maxTravelTime" />
     </q-field>
 
     <!-- WORK TIME -->
@@ -88,6 +88,7 @@
       return {
         meteoOptions: meteoOptions,
         pauseOptions: pauseOptions,
+        maxTravelTime: this.config.maxTravelTime,
         report: {
           squad: [user],
           meteo: '',
