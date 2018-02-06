@@ -1,6 +1,13 @@
 <template>
   <div>
 
+    <!-- SITE -->
+    <q-select
+    v-model="report.site"
+    float-label="Sito"
+    filter
+    :options="ajaxOptions.siteOptions" />
+
     <!-- SQUAD -->
     <q-select
     multiple
@@ -97,9 +104,26 @@
           workStopped: null,
           travelTime: 0,
           workTime: 8,
-          notes: ''
+          notes: '',
+          site: ''
         }
       }
+    },
+    mounted () {
+      this.$http.get(this.config.routes.getTodayReport)
+        .then(response => {
+          if (response.data) {
+            this.report.squad = response.data.squad
+            this.report.meteo = response.data.meteo
+            this.report.workStarted = response.data.workStarted
+            this.report.workPause = response.data.workPause
+            this.report.workStopped = response.data.workStopped
+            this.report.travelTime = response.data.travelTime
+            this.report.workTime = response.data.workTime
+            this.report.notes = response.data.notes
+            this.report.site = response.data.site
+          }
+        })
     },
     methods: {
       send () {

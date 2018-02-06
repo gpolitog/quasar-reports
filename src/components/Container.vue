@@ -18,21 +18,13 @@
     </q-tabs>
 
     <div id="main" class="column scroll overflow-hidden">
-      <!-- SITE -->
-      <q-select
-      v-model="currentSite"
-      v-on:change="updateSite"
-      float-label="Sito"
-      filter
-      :options="ajaxOptions.siteOptions" />
-
       <router-view :ajax-options="ajaxOptions" />
     </div>
   </q-layout>
 </template>
 
 <script>
-import { QLayout, QTabs, QToolbarTitle, QRouteTab, QToolbar, QSelect, QIcon,
+import { QLayout, QTabs, QToolbarTitle, QRouteTab, QToolbar, QIcon,
   QBtn, LocalStorage, Dialog, date } from 'quasar'
 import router from '../router'
 
@@ -46,8 +38,7 @@ export default {
     QRouteTab,
     QToolbar,
     QIcon,
-    QBtn,
-    QSelect
+    QBtn
   },
   data () {
     return {
@@ -58,15 +49,10 @@ export default {
         siteOptions: [],
         vehicleOptions: [],
         userOptions: []
-      },
-      currentSite: ''
+      }
     }
   },
   methods: {
-    updateSite () {
-      this.$http.defaults.headers.common['site'] = this.currentSite
-      LocalStorage.set('currentSite', this.currentSite)
-    },
     logoutDialog () {
       const self = this
       Dialog.create({
