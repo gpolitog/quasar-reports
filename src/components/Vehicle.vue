@@ -33,21 +33,56 @@
     <q-btn @click="send" color="green">
       Invia dati relativi al mezzo {{ report.vehicle }}
     </q-btn>
+
+    <!-- TODAY'S VEHICLES -->
+    <q-list
+     separator
+     no-border
+     style="margin: 20px;">
+      <q-list-header>Veicoli aggiunti oggi</q-list-header>
+      <q-item
+      v-for="(vehicle, index) of vehicles"
+      :key="index">
+        <q-item-main>
+          <q-item-tile label> {{vehicle.vehicle}} </q-item-tile>
+          <q-item-tile sublabel> {{vehicle.vehicleKm}} Km </q-item-tile>
+          <q-item-tile sublabel> Entrata in autostrada: {{vehicle.highwayEnter}} </q-item-tile>
+          <q-item-tile sublabel> Uscita autostrada: {{vehicle.highwayExit}} </q-item-tile>
+        </q-item-main>
+        <q-item-side right>
+          <q-btn
+          round
+          icon="delete"
+          color="red"
+          :vehicleId="vehicle._id"
+          @click="deleteVehicle"></q-btn>
+        </q-item-side>
+      </q-item>
+    </q-list>
   </div>
 </template>
 
 <script>
-import { QInput, QAutocomplete, QSelect, QBtn } from 'quasar'
+import { QInput, QAutocomplete, QSelect, QBtn,
+  QList, QListHeader, QItem, QItemMain, QItemTile,
+  QItemSide } from 'quasar'
 export default {
   components: {
     QSelect,
     QAutocomplete,
     QBtn,
-    QInput
+    QInput,
+    QList,
+    QListHeader,
+    QItem,
+    QItemMain,
+    QItemTile,
+    QItemSide
   },
   props: ['ajaxOptions'],
   data () {
     return {
+      vehicles: [],
       report: {
         vehicle: '',
         vehicleKm: 0,
@@ -56,14 +91,32 @@ export default {
       }
     }
   },
+  mounted () {
+    this.reloadVehicles()
+  },
   methods: {
     send () {
       this.$http.post(this.config.routes.vehicle, this.report)
         .then(() => {
-          alert('I dati sul veicolo sono stati inviati correttamente')
+          this.reloadVehicles()
         })
         .catch(err => {
           if (err) alert('C\'è stato un errore e non è stato possibile inviare i dati')
+        })
+    },
+    deleteVehicle (event) {
+      const vehicleId = event.target.attributes.vehicleId.nodeValue
+      this.$http.post(this.config.routes.deleteVehicle, {id: vehicleId})
+        .then(() => {
+          this.reloadVehicles()
+        })
+    },
+    reloadVehicles () {
+      this.$http.get(this.config.routes.getTodayVehicles)
+        .then(response => {
+          if (response.data) {
+            this.vehicles = response.data
+          }
         })
     }
   }

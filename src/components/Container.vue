@@ -84,24 +84,24 @@ export default {
   mounted () {
     this.$http.post(this.config.routes.select)
       .then(result => {
-        this.ajaxOptions.siteOptions = result.data.site.map(site => {
+        this.ajaxOptions.siteOptions = result.data.site ? result.data.site.map(site => {
           return {
             label: site.name,
             value: site.code
           }
-        })
-        this.ajaxOptions.vehicleOptions = result.data.vehicle.map(vehicle => {
+        }) : []
+        this.ajaxOptions.vehicleOptions = result.data.vehicle ? result.data.vehicle.map(vehicle => {
           return {
             label: vehicle.description,
             value: vehicle.plaque
           }
-        })
-        this.ajaxOptions.highwayOptions = result.data.highway.map(high => {
+        }) : []
+        this.ajaxOptions.highwayOptions = result.data.highway ? result.data.highway.map(high => {
           return {
             label: high.name,
             value: high.name
           }
-        })
+        }) : []
         this.ajaxOptions.userOptions = result.data.user.map(user => {
           return {
             label: user.firstName + ' ' + user.lastName,
